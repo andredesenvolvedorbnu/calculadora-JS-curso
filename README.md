@@ -1,2 +1,2 @@
-# calculadora_JS_curso
+# calculadora-JS-curso
 Calculadora em JS / Curso / Treinamento
