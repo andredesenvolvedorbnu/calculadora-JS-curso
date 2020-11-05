@@ -1,0 +1,201 @@
+<html>
+
+
+<head>
+    <h3>
+        <title>Calculadora</title>
+    </h3>
+
+
+</head>
+
+
+
+
+
+
+<body>
+    <script type="text/javascript">
+
+        var Accum = 0;
+        var FlagNewNum = false;
+        var PendingOp = "";
+
+        //ADICIONANDO VALORES DE CADA BOTÃO AO PARAMETRO NUM
+
+
+
+        function ApertNum(Num) {
+            if (FlagNewNum) {
+                document.frm_calc.txt_01.value = Num;
+                FlagNewNum = false;
+            }
+            else {
+                if (document.frm_calc.txt_01.value == "0")
+                    document.frm_calc.txt_01.value = Num;
+                else
+                    document.frm_calc.txt_01.value += Num;
+            }
+        }
+
+        //EXIBE O RESULTADO, APERTANDO IGUAL
+        function Operação(Op) {
+
+
+            if (document.frm_calc.txt_01.value == "") {
+                alert("Campo vazio, adicionar valor");
+                document.frm_calc.txt_01.value = "0";
+            }
+            else {
+
+
+                if (FlagNewNum && PendingOp != "=");
+                else {
+                    FlagNewNum = true;
+                    if ('+' == PendingOp)
+                        Accum += parseFloat(document.frm_calc.txt_01.value);
+                    else if ('-' == PendingOp)
+                        Accum -= parseFloat(document.frm_calc.txt_01.value);
+                    else if ('/' == PendingOp)
+                        Accum /= parseFloat(document.frm_calc.txt_01.value);
+                    else if ('*' == PendingOp)
+                        Accum *= parseFloat(document.frm_calc.txt_01.value);
+                    else
+                        Accum = parseFloat(document.frm_calc.txt_01.value);
+                    document.frm_calc.txt_01.value = Accum;
+                    PendingOp = Op;
+                }
+
+
+            }
+        }
+
+        //COLOCA PONTO 9 ( . ) NOS NUMEROS
+        function Ponto() {
+            var curtxt_01 = document.frm_calc.txt_01.value;
+            if (FlagNewNum) {
+                curtxt_01 = "0.";
+                FlagNewNum = false;
+            }
+            else {
+                if (curtxt_01.indexOf(".") == -1)
+                    curtxt_01 += ".";
+            }
+            document.frm_calc.txt_01.value = curtxt_01;
+        }
+
+    </script>
+    <form name="frm_calc" acton>
+        <center>
+            <table width="200" cellpadding="10" cellspacing="5"
+                style="color:#000000; background-color:#8cc6ec; border:2pt solid#000000">
+                <tr>
+                    <td colspan="5" align="Center" bgColor="#FFB90F">
+                        <Font Face="Verdana" Size="8" Color="#000000"><b>Calculadora</b></font>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center" border:2pt solid#FFB90F><input type="text" name="txt_01" value="0"
+                            style="color:#000000; background-color:#ffffff;border:2pt solid#000000"></td>
+                    <td>
+                        <center><input type="reset" value="AC" onclick=""
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:9px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="=" name="btn_igual" onclick="Operação('=')"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:9px; border:30">
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+
+
+                    <td>
+                        <center><input type="button" value="7" name="btn_7" onclick="ApertNum(7)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="8" name="btn_8" onclick="ApertNum(8)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="9" name="btn_9" onclick="ApertNum(9)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="+" name="btn_soma" onclick="Operação('+')"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="-" name="btn_subt" onclick="Operação('-')"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <center><input type="button" value="4" name="btn_4" onclick="ApertNum(4)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="5" name="btn_5" onclick="ApertNum(5)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="6" name="btn_6" onclick="ApertNum(6)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="*" name="btn_mult" onclick="Operação('*')"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="/" name="btn_divi" onclick="Operação('/')"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <center><input type="button" value="1" name="btn_1" onclick="ApertNum(1)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="2" name="btn_2" onclick="ApertNum(2)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="3" name="btn_3" onclick="ApertNum(3)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="0" name="btn_0" onclick="ApertNum(0)"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                    <td>
+                        <center><input type="button" value="." name="btn_pont" onclick="Ponto()"
+                                style="color:#000000; background-color:#ffffff; cursor:hand; padding:10px; border:30">
+                        </center>
+                    </td>
+                </tr>
+            </table>
+    </form>
+    </center>
+</body>
+
+</html>
